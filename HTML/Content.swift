@@ -6,14 +6,14 @@
 //
 
 extension HTML {
-	protocol Content {
+	public protocol Content {
 		func serialize(into result: inout String, indentation: String)
 	}
 }
 
 
 extension String: HTML.Content {
-	func serialize(into result: inout String, indentation: String) {
+	public func serialize(into result: inout String, indentation: String) {
 		result.append(self)
 	}
 }
@@ -37,7 +37,7 @@ extension HTML.Node: HTML.Content {
 		"</\(tag)>"
 	}
 	
-	func serialize(into result: inout String, indentation: String = "") {
+	public func serialize(into result: inout String, indentation: String = "") {
 		result.append(openingTag)
 		
 		if content.isEmpty && selfClosing { return }
@@ -57,7 +57,7 @@ extension HTML.Node: HTML.Content {
 		result.append(closingTag)
 	}
 	
-	func serialize(indentation: String = "") -> String {
+	public func serialize(indentation: String = "") -> String {
 		var result = ""
 		serialize(into: &result, indentation: indentation)
 		return result
